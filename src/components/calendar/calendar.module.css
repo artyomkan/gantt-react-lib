@@ -2,11 +2,11 @@
   text-anchor: middle;
   fill: #333;
   -webkit-touch-callout: none;
+  pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  pointer-events: none;
 }
 
 .calendarTopTick {
@@ -17,11 +17,11 @@
   text-anchor: middle;
   fill: #555;
   -webkit-touch-callout: none;
+  pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  pointer-events: none;
 }
 
 .calendarHeader {

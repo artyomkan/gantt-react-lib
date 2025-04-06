@@ -1,7 +1,7 @@
-import React, { ReactChild } from "react";
-import { Task } from "../../types/public-types";
-import { addToDate } from "../../helpers/date-helper";
-import styles from "./grid.module.css";
+import React, { ReactChild } from 'react';
+import { addToDate } from '../../helpers/date-helper';
+import { Task } from '../../types/public-types';
+import styles from './grid.module.css';
 
 export type GridBodyProps = {
   tasks: Task[];
@@ -25,8 +25,8 @@ export const GridBody: React.FC<GridBodyProps> = ({
   const gridRows: ReactChild[] = [];
   const rowLines: ReactChild[] = [
     <line
-      key="RowLineFirst"
-      x="0"
+      key='RowLineFirst'
+      x='0'
       y1={0}
       x2={svgWidth}
       y2={0}
@@ -36,8 +36,8 @@ export const GridBody: React.FC<GridBodyProps> = ({
   for (const task of tasks) {
     gridRows.push(
       <rect
-        key={"Row" + task.id}
-        x="0"
+        key={'Row' + task.id}
+        x='0'
         y={y}
         width={svgWidth}
         height={rowHeight}
@@ -46,8 +46,8 @@ export const GridBody: React.FC<GridBodyProps> = ({
     );
     rowLines.push(
       <line
-        key={"RowLine" + task.id}
-        x="0"
+        key={'RowLine' + task.id}
+        x='0'
         y1={y + rowHeight}
         x2={svgWidth}
         y2={y + rowHeight}
@@ -84,7 +84,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
         addToDate(
           date,
           date.getTime() - dates[i - 1].getTime(),
-          "millisecond"
+          'millisecond'
         ).getTime() >= now.getTime())
     ) {
       today = (
@@ -117,11 +117,11 @@ export const GridBody: React.FC<GridBodyProps> = ({
     tickX += columnWidth;
   }
   return (
-    <g className="gridBody">
-      <g className="rows">{gridRows}</g>
-      <g className="rowLines">{rowLines}</g>
-      <g className="ticks">{ticks}</g>
-      <g className="today">{today}</g>
+    <g className='gridBody'>
+      <g className='rows'>{gridRows}</g>
+      <g className='rowLines'>{rowLines}</g>
+      <g className='ticks'>{ticks}</g>
+      <g className='today'>{today}</g>
     </g>
   );
 };

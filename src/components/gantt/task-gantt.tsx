@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from "react";
-import { GridProps, Grid } from "../grid/grid";
-import { CalendarProps, Calendar } from "../calendar/calendar";
-import { TaskGanttContentProps, TaskGanttContent } from "./task-gantt-content";
-import styles from "./gantt.module.css";
+import React, { useEffect, useRef } from 'react';
+import { Calendar, CalendarProps } from '../calendar/calendar';
+import { Grid, GridProps } from '../grid/grid';
+import styles from './gantt.module.css';
+import { TaskGanttContent, TaskGanttContentProps } from './task-gantt-content';
 
 export type TaskGanttProps = {
   gridProps: GridProps;
@@ -41,10 +41,10 @@ export const TaskGantt: React.FC<TaskGanttProps> = ({
     <div
       className={styles.ganttVerticalContainer}
       ref={verticalGanttContainerRef}
-      dir="ltr"
+      dir='ltr'
     >
       <svg
-        xmlns="http://www.w3.org/2000/svg"
+        xmlns='http://www.w3.org/2000/svg'
         width={gridProps.svgWidth}
         height={calendarProps.headerHeight}
         fontFamily={barProps.fontFamily}
@@ -61,7 +61,7 @@ export const TaskGantt: React.FC<TaskGanttProps> = ({
         }
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
+          xmlns='http://www.w3.org/2000/svg'
           width={gridProps.svgWidth}
           height={barProps.rowHeight * barProps.tasks.length}
           fontFamily={barProps.fontFamily}

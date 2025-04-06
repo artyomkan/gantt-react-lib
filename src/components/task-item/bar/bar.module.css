@@ -4,8 +4,8 @@
 }
 
 .barWrapper:hover .barHandle {
-  visibility: visible;
   opacity: 1;
+  visibility: visible;
 }
 
 .barHandle {

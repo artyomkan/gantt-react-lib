@@ -1,7 +1,7 @@
 .taskListWrapper {
-  display: table;
   border-bottom: #e6e4e4 1px solid;
   border-left: #e6e4e4 1px solid;
+  display: table;
 }
 
 .taskListTableRow {
@@ -15,10 +15,10 @@
 
 .taskListCell {
   display: table-cell;
-  vertical-align: middle;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 .taskListNameWrapper {
   display: flex;
@@ -26,10 +26,10 @@
 
 .taskListExpander {
   color: rgb(86 86 86);
+  cursor: pointer;
   font-size: 0.6rem;
   padding: 0.15rem 0.2rem 0rem 0.2rem;
   user-select: none;
-  cursor: pointer;
 }
 .taskListEmptyExpander {
   font-size: 0.6rem;

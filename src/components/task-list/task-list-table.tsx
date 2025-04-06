@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
-import styles from "./task-list-table.module.css";
-import { Task } from "../../types/public-types";
+import React, { useMemo } from 'react';
+import { Task } from '../../types/public-types';
+import styles from './task-list-table.module.css';
 
 const localeDateStringCache = {};
 const toLocaleDateStringFactory =
@@ -15,10 +15,10 @@ const toLocaleDateStringFactory =
     return lds;
   };
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
-  weekday: "short",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
+  weekday: 'short',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
 };
 
 export const TaskListTableDefault: React.FC<{
@@ -53,12 +53,12 @@ export const TaskListTableDefault: React.FC<{
         fontSize: fontSize,
       }}
     >
-      {tasks.map(t => {
-        let expanderSymbol = "";
+      {tasks.map((t) => {
+        let expanderSymbol = '';
         if (t.hideChildren === false) {
-          expanderSymbol = "▼";
+          expanderSymbol = '▼';
         } else if (t.hideChildren === true) {
-          expanderSymbol = "▶";
+          expanderSymbol = '▶';
         }
 
         return (

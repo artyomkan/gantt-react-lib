@@ -1,8 +1,8 @@
 .ganttTable {
-  display: table;
   border-bottom: #e6e4e4 1px solid;
-  border-top: #e6e4e4 1px solid;
   border-left: #e6e4e4 1px solid;
+  border-top: #e6e4e4 1px solid;
+  display: table;
 }
 
 .ganttTable_Header {
@@ -12,8 +12,8 @@
 
 .ganttTable_HeaderSeparator {
   border-right: 1px solid rgb(196, 196, 196);
-  opacity: 1;
   margin-left: -2px;
+  opacity: 1;
 }
 
 .ganttTable_HeaderItem {

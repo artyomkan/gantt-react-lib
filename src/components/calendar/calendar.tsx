@@ -1,15 +1,15 @@
-import React, { ReactChild } from "react";
-import { ViewMode } from "../../types/public-types";
-import { TopPartOfCalendar } from "./top-part-of-calendar";
+import React, { ReactChild } from 'react';
 import {
   getCachedDateTimeFormat,
   getDaysInMonth,
   getLocalDayOfWeek,
   getLocaleMonth,
   getWeekNumberISO8601,
-} from "../../helpers/date-helper";
-import { DateSetup } from "../../types/date-setup";
-import styles from "./calendar.module.css";
+} from '../../helpers/date-helper';
+import { DateSetup } from '../../types/date-setup';
+import { ViewMode } from '../../types/public-types';
+import styles from './calendar.module.css';
+import { TopPartOfCalendar } from './top-part-of-calendar';
 
 export type CalendarProps = {
   dateSetup: DateSetup;
@@ -83,7 +83,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     for (let i = 0; i < dateSetup.dates.length; i++) {
       const date = dateSetup.dates[i];
       // const bottomValue = getLocaleMonth(date, locale);
-      const quarter = "Q" + Math.floor((date.getMonth() + 3) / 3);
+      const quarter = 'Q' + Math.floor((date.getMonth() + 3) / 3);
       bottomValues.push(
         <text
           key={date.getTime()}
@@ -168,12 +168,12 @@ export const Calendar: React.FC<CalendarProps> = ({
   const getCalendarValuesForWeek = () => {
     const topValues: ReactChild[] = [];
     const bottomValues: ReactChild[] = [];
-    let weeksCount: number = 1;
+    let weeksCount = 1;
     const topDefaultHeight = headerHeight * 0.5;
     const dates = dateSetup.dates;
     for (let i = dates.length - 1; i >= 0; i--) {
       const date = dates[i];
-      let topValue = "";
+      let topValue = '';
       if (i === 0 || date.getMonth() !== dates[i - 1].getMonth()) {
         // top
         topValue = `${getLocaleMonth(date, locale)}, ${date.getFullYear()}`;
@@ -221,7 +221,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     const dates = dateSetup.dates;
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
-      const bottomValue = `${getLocalDayOfWeek(date, locale, "short")}, ${date
+      const bottomValue = `${getLocalDayOfWeek(date, locale, 'short')}, ${date
         .getDate()
         .toString()}`;
 
@@ -271,7 +271,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
       const bottomValue = getCachedDateTimeFormat(locale, {
-        hour: "numeric",
+        hour: 'numeric',
       }).format(date);
 
       bottomValues.push(
@@ -289,7 +289,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         const topValue = `${getLocalDayOfWeek(
           date,
           locale,
-          "short"
+          'short'
         )}, ${date.getDate()} ${getLocaleMonth(date, locale)}`;
         topValues.push(
           <TopPartOfCalendar
@@ -316,7 +316,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
       const bottomValue = getCachedDateTimeFormat(locale, {
-        hour: "numeric",
+        hour: 'numeric',
       }).format(date);
 
       bottomValues.push(
@@ -335,7 +335,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         const topValue = `${getLocalDayOfWeek(
           displayDate,
           locale,
-          "long"
+          'long'
         )}, ${displayDate.getDate()} ${getLocaleMonth(displayDate, locale)}`;
         const topPosition = (date.getHours() - 24) / 2;
         topValues.push(
@@ -381,7 +381,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       [topValues, bottomValues] = getCalendarValuesForHour();
   }
   return (
-    <g className="calendar" fontSize={fontSize} fontFamily={fontFamily}>
+    <g className='calendar' fontSize={fontSize} fontFamily={fontFamily}>
       <rect
         x={0}
         y={0}

@@ -1,5 +1,5 @@
-import React, { SyntheticEvent, useRef, useEffect } from "react";
-import styles from "./horizontal-scroll.module.css";
+import React, { SyntheticEvent, useEffect, useRef } from 'react';
+import styles from './horizontal-scroll.module.css';
 
 export const HorizontalScroll: React.FC<{
   scroll: number;
@@ -18,7 +18,7 @@ export const HorizontalScroll: React.FC<{
 
   return (
     <div
-      dir="ltr"
+      dir='ltr'
       style={{
         margin: rtl
           ? `0px ${taskListWidth}px 0px 0px`
