@@ -20,4 +20,4 @@ export interface BarTask extends Task {
   };
 }
 
-export type TaskTypeInternal = TaskType | 'smalltask';
+export type TaskTypeInternal = TaskType;

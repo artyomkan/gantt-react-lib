@@ -6,4 +6,5 @@ export type {
   GanttProps,
   StylingOption,
   Task,
+  TaskType,
 } from './types/public-types';

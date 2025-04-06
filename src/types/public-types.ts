@@ -1,3 +1,5 @@
+import React from 'react';
+
 export enum ViewMode {
   Hour = 'Hour',
   QuarterDay = 'Quarter Day',
@@ -9,7 +11,11 @@ export enum ViewMode {
   QuarterYear = 'QuarterYear',
   Year = 'Year',
 }
-export type TaskType = 'task' | 'milestone' | 'project';
+export enum TaskType {
+  Milestone = 1,
+  Task,
+  Subtask,
+}
 export interface Task {
   id: string;
   type: TaskType;
@@ -100,16 +106,18 @@ export interface StylingOption {
    * From 0 to 100
    */
   barFill?: number;
-  barProgressColor?: string;
-  barProgressSelectedColor?: string;
-  barBackgroundColor?: string;
-  barBackgroundSelectedColor?: string;
-  projectProgressColor?: string;
-  projectProgressSelectedColor?: string;
-  projectBackgroundColor?: string;
-  projectBackgroundSelectedColor?: string;
+  milestoneProgressColor?: string;
+  milestoneProgressSelectedColor?: string;
   milestoneBackgroundColor?: string;
   milestoneBackgroundSelectedColor?: string;
+  taskProgressColor?: string;
+  taskProgressSelectedColor?: string;
+  taskBackgroundColor?: string;
+  taskBackgroundSelectedColor?: string;
+  subtaskProgressColor?: string;
+  subtaskProgressSelectedColor?: string;
+  subtaskBackgroundColor?: string;
+  subtaskBackgroundSelectedColor?: string;
   arrowColor?: string;
   arrowIndent?: number;
   todayColor?: string;

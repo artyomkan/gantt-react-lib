@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { convertToBarTasks } from '../../helpers/bar-helper';
 import { ganttDateRange, seedDates } from '../../helpers/date-helper';
-import { removeHiddenTasks, sortTasks } from '../../helpers/other-helper';
+import { sortTasks } from '../../helpers/other-helper';
 import { BarTask } from '../../types/bar-task';
 import { DateSetup } from '../../types/date-setup';
 import { GanttEvent } from '../../types/gantt-task-actions';
@@ -36,16 +36,18 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   locale = 'en-GB',
   barFill = 60,
   barCornerRadius = 3,
-  barProgressColor = '#a3a3ff',
-  barProgressSelectedColor = '#8282f5',
-  barBackgroundColor = '#b8c2cc',
-  barBackgroundSelectedColor = '#aeb8c2',
-  projectProgressColor = '#7db59a',
-  projectProgressSelectedColor = '#59a985',
-  projectBackgroundColor = '#fac465',
-  projectBackgroundSelectedColor = '#f7bb53',
-  milestoneBackgroundColor = '#f1c453',
-  milestoneBackgroundSelectedColor = '#f29e4c',
+  milestoneProgressColor = '#a3a3ff',
+  milestoneProgressSelectedColor = '#8282f5',
+  milestoneBackgroundColor = '#b8c2cc',
+  milestoneBackgroundSelectedColor = '#aeb8c2',
+  taskProgressColor = '#a3a3ff',
+  taskProgressSelectedColor = '#8282f5',
+  taskBackgroundColor = '#b8c2cc',
+  taskBackgroundSelectedColor = '#aeb8c2',
+  subtaskProgressColor = '#a3a3ff',
+  subtaskProgressSelectedColor = '#8282f5',
+  subtaskBackgroundColor = '#b8c2cc',
+  subtaskBackgroundSelectedColor = '#aeb8c2',
   rtl = false,
   handleWidth = 8,
   timeStep = 300000,
@@ -100,12 +102,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
 
   // task change events
   useEffect(() => {
-    let filteredTasks: Task[];
-    if (onExpanderClick) {
-      filteredTasks = removeHiddenTasks(tasks);
-    } else {
-      filteredTasks = tasks;
-    }
+    let filteredTasks: Task[] = tasks;
     filteredTasks = filteredTasks.sort(sortTasks);
     const [startDate, endDate] = ganttDateRange(
       filteredTasks,
@@ -130,16 +127,18 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
         barCornerRadius,
         handleWidth,
         rtl,
-        barProgressColor,
-        barProgressSelectedColor,
-        barBackgroundColor,
-        barBackgroundSelectedColor,
-        projectProgressColor,
-        projectProgressSelectedColor,
-        projectBackgroundColor,
-        projectBackgroundSelectedColor,
+        milestoneProgressColor,
+        milestoneProgressSelectedColor,
         milestoneBackgroundColor,
-        milestoneBackgroundSelectedColor
+        milestoneBackgroundSelectedColor,
+        taskProgressColor,
+        taskProgressSelectedColor,
+        taskBackgroundColor,
+        taskBackgroundSelectedColor,
+        subtaskProgressColor,
+        subtaskProgressSelectedColor,
+        subtaskBackgroundColor,
+        subtaskBackgroundSelectedColor
       )
     );
   }, [
@@ -151,16 +150,18 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     columnWidth,
     taskHeight,
     handleWidth,
-    barProgressColor,
-    barProgressSelectedColor,
-    barBackgroundColor,
-    barBackgroundSelectedColor,
-    projectProgressColor,
-    projectProgressSelectedColor,
-    projectBackgroundColor,
-    projectBackgroundSelectedColor,
+    milestoneProgressColor,
+    milestoneProgressSelectedColor,
     milestoneBackgroundColor,
     milestoneBackgroundSelectedColor,
+    taskProgressColor,
+    taskProgressSelectedColor,
+    taskBackgroundColor,
+    taskBackgroundSelectedColor,
+    subtaskProgressColor,
+    subtaskProgressSelectedColor,
+    subtaskBackgroundColor,
+    subtaskBackgroundSelectedColor,
     rtl,
     scrollX,
     onExpanderClick,
