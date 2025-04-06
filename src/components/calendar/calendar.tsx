@@ -221,9 +221,7 @@ export const Calendar: React.FC<CalendarProps> = ({
     const dates = dateSetup.dates;
     for (let i = 0; i < dates.length; i++) {
       const date = dates[i];
-      const bottomValue = `${getLocalDayOfWeek(date, locale, 'short')}, ${date
-        .getDate()
-        .toString()}`;
+      const bottomValue = `${date.getDate().toString()}`;
 
       bottomValues.push(
         <text
@@ -239,22 +237,22 @@ export const Calendar: React.FC<CalendarProps> = ({
         i + 1 !== dates.length &&
         date.getMonth() !== dates[i + 1].getMonth()
       ) {
-        const topValue = getLocaleMonth(date, locale);
+        const topValue = getLocaleMonth(date, locale, false);
 
         topValues.push(
           <TopPartOfCalendar
             key={topValue + date.getFullYear()}
-            value={topValue}
+            value={`${topValue}, ${date.getFullYear()}`}
             x1Line={columnWidth * (i + 1)}
             y1Line={0}
             y2Line={topDefaultHeight}
             xText={
               columnWidth * (i + 1) -
               getDaysInMonth(date.getMonth(), date.getFullYear()) *
-                columnWidth *
-                0.5
+                columnWidth +
+              (columnWidth / 2) * 0.8
             }
-            yText={topDefaultHeight * 0.9}
+            yText={topDefaultHeight * 0.8}
           />
         );
       }
@@ -381,7 +379,7 @@ export const Calendar: React.FC<CalendarProps> = ({
       [topValues, bottomValues] = getCalendarValuesForHour();
   }
   return (
-    <g className='calendar' fontSize={fontSize} fontFamily={fontFamily}>
+    <g className='gantt-calendar' fontSize={fontSize} fontFamily={fontFamily}>
       <rect
         x={0}
         y={0}
@@ -389,7 +387,8 @@ export const Calendar: React.FC<CalendarProps> = ({
         height={headerHeight}
         className={styles.calendarHeader}
       />
-      {bottomValues} {topValues}
+      {topValues}
+      <g className='gantt-calendar-bottom'>{bottomValues}</g>
     </g>
   );
 };

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useEffect, useRef } from 'react';
 import { Calendar, CalendarProps } from '../calendar/calendar';
 import { Grid, GridProps } from '../grid/grid';
@@ -39,21 +40,29 @@ export const TaskGantt: React.FC<TaskGanttProps> = ({
 
   return (
     <div
-      className={styles.ganttVerticalContainer}
+      className={classNames(
+        styles.ganttVerticalContainer,
+        'gantt-container-right'
+      )}
       ref={verticalGanttContainerRef}
       dir='ltr'
     >
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        width={gridProps.svgWidth}
-        height={calendarProps.headerHeight}
-        fontFamily={barProps.fontFamily}
-      >
-        <Calendar {...calendarProps} />
-      </svg>
+      <div className='gantt-calendar-wrapper'>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          width={gridProps.svgWidth}
+          height={calendarProps.headerHeight}
+          fontFamily={barProps.fontFamily}
+        >
+          <Calendar {...calendarProps} />
+        </svg>
+      </div>
       <div
         ref={horizontalContainerRef}
-        className={styles.horizontalContainer}
+        className={classNames(
+          styles.horizontalContainer,
+          'gantt-chart-wrapper'
+        )}
         style={
           ganttHeight
             ? { height: ganttHeight, width: gridProps.svgWidth }

@@ -1,4 +1,4 @@
-import { BarTask, TaskTypeInternal } from '../types/bar-task';
+import { BarTask } from '../types/bar-task';
 import { BarMoveAction } from '../types/gantt-task-actions';
 import { Task, TaskType } from '../types/public-types';
 
@@ -11,6 +11,7 @@ export const convertToBarTasks = (
   barCornerRadius: number,
   handleWidth: number,
   rtl: boolean,
+  displayBarText: boolean,
   milestoneProgressColor: string,
   milestoneProgressSelectedColor: string,
   milestoneBackgroundColor: string,
@@ -35,6 +36,7 @@ export const convertToBarTasks = (
       barCornerRadius,
       handleWidth,
       rtl,
+      displayBarText,
       milestoneProgressColor,
       milestoneProgressSelectedColor,
       milestoneBackgroundColor,
@@ -75,6 +77,7 @@ const convertToBarTask = (
   barCornerRadius: number,
   handleWidth: number,
   rtl: boolean,
+  displayBarText: boolean,
   milestoneProgressColor: string,
   milestoneProgressSelectedColor: string,
   milestoneBackgroundColor: string,
@@ -121,6 +124,7 @@ const convertToBarTask = (
     barCornerRadius,
     handleWidth,
     rtl,
+    displayBarText,
     progressColor,
     progressSelectedColor,
     backgroundColor,
@@ -138,6 +142,7 @@ const convertToBar = (
   barCornerRadius: number,
   handleWidth: number,
   rtl: boolean,
+  displayBarText: boolean,
   barProgressColor: string,
   barProgressSelectedColor: string,
   barBackgroundColor: string,
@@ -150,11 +155,7 @@ const convertToBar = (
     x1 = taskXCoordinateRTL(task.end, dates, columnWidth);
   } else {
     x1 = taskXCoordinate(task.start, dates, columnWidth);
-    x2 = taskXCoordinate(task.end, dates, columnWidth);
-  }
-  const typeInternal: TaskTypeInternal = task.type;
-  if (x2 - x1 < handleWidth * 2) {
-    x2 = x1 + handleWidth * 2;
+    x2 = taskXCoordinate(task.end, dates, columnWidth, false);
   }
 
   const [progressWidth, progressX] = progressWithByParams(
@@ -173,8 +174,8 @@ const convertToBar = (
     ...task.styles,
   };
   return {
+    displayBarText,
     ...task,
-    typeInternal,
     x1,
     x2,
     y,
@@ -190,13 +191,17 @@ const convertToBar = (
   };
 };
 
-const taskXCoordinate = (xDate: Date, dates: Date[], columnWidth: number) => {
-  const index = dates.findIndex((d) => d.getTime() >= xDate.getTime()) - 1;
+const taskXCoordinate = (
+  xDate: Date,
+  dates: Date[],
+  columnWidth: number,
+  isStartDate = true
+) => {
+  const index =
+    dates.findIndex((d) => d.getTime() >= xDate.getTime()) -
+    (isStartDate ? 1 : 0);
 
-  const remainderMillis = xDate.getTime() - dates[index].getTime();
-  const percentOfInterval =
-    remainderMillis / (dates[index + 1].getTime() - dates[index].getTime());
-  return index * columnWidth + percentOfInterval * columnWidth;
+  return index * columnWidth;
 };
 const taskXCoordinateRTL = (
   xDate: Date,

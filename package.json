@@ -17,6 +17,7 @@
     "lint": "eslint src/**/*.{ts,tsx}"
   },
   "peerDependencies": {
+    "classnames": "^2.0.0",
     "react": "^18.0.0"
   },
   "devDependencies": {
@@ -37,6 +38,7 @@
     "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.5.0",
     "@typescript-eslint/parser": "^5.5.0",
+    "classnames": "^2.5.1",
     "cross-env": "^7.0.3",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^8.0.0",

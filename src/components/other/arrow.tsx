@@ -38,7 +38,7 @@ export const Arrow: React.FC<ArrowProps> = ({
   }
 
   return (
-    <g className='arrow'>
+    <g className='gantt-chart-arrow'>
       <path strokeWidth='1.5' d={path} fill='none' />
       <polygon points={trianglePoints} />
     </g>

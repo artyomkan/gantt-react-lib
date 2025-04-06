@@ -117,7 +117,7 @@ export const ganttDateRange = (
       newStartDate = startOfDate(newStartDate, 'day');
       newStartDate = addToDate(newStartDate, -1 * preStepsCount, 'day');
       newEndDate = startOfDate(newEndDate, 'day');
-      newEndDate = addToDate(newEndDate, 19, 'day');
+      newEndDate = addToDate(newEndDate, 3, 'day');
       break;
     case ViewMode.QuarterDay:
       newStartDate = startOfDate(newStartDate, 'day');
@@ -180,15 +180,15 @@ export const seedDates = (
   return dates;
 };
 
-export const getLocaleMonth = (date: Date, locale: string) => {
+export const getLocaleMonth = (date: Date, locale: string, withDot = true) => {
   let bottomValue = getCachedDateTimeFormat(locale, {
-    month: 'long',
+    month: 'short',
   }).format(date);
   bottomValue = bottomValue.replace(
     bottomValue[0],
     bottomValue[0].toLocaleUpperCase()
   );
-  return bottomValue;
+  return withDot ? bottomValue : bottomValue.replace('.', '');
 };
 
 export const getLocalDayOfWeek = (

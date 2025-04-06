@@ -57,7 +57,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   arrowIndent = 20,
   todayColor = 'rgba(252, 248, 227, 0.5)',
   viewDate,
-  TooltipContent = StandardTooltipContent,
+  tooltip,
   TaskListHeader = TaskListHeaderDefault,
   TaskListTable = TaskListTableDefault,
   onDateChange,
@@ -67,9 +67,11 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   onDelete,
   onSelect,
   onExpanderClick,
+  displayBarText = false,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const taskListRef = useRef<HTMLDivElement>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [dateSetup, setDateSetup] = useState<DateSetup>(() => {
     const [startDate, endDate] = ganttDateRange(tasks, viewMode, preStepsCount);
     return { viewMode, dates: seedDates(startDate, endDate, viewMode) };
@@ -127,6 +129,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
         barCornerRadius,
         handleWidth,
         rtl,
+        displayBarText,
         milestoneProgressColor,
         milestoneProgressSelectedColor,
         milestoneBackgroundColor,
@@ -313,11 +316,20 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   };
 
   const handleScrollX = (event: SyntheticEvent<HTMLDivElement>) => {
-    if (scrollX !== event.currentTarget.scrollLeft && !ignoreScrollEvent) {
-      setScrollX(event.currentTarget.scrollLeft);
+    const newScrollLeft = event.currentTarget.scrollLeft;
+
+    if (scrollX !== newScrollLeft) {
+      setScrollX(newScrollLeft);
+
       setIgnoreScrollEvent(true);
-    } else {
-      setIgnoreScrollEvent(false);
+
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIgnoreScrollEvent(false);
+      }, 100);
     }
   };
 
@@ -469,7 +481,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
           scrollY={scrollY}
           scrollX={scrollX}
         />
-        {ganttEvent.changedTask && (
+        {ganttEvent.changedTask && tooltip?.TooltipContent && (
           <Tooltip
             arrowIndent={arrowIndent}
             rowHeight={rowHeight}
@@ -482,7 +494,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
             task={ganttEvent.changedTask}
             headerHeight={headerHeight}
             taskListWidth={taskListWidth}
-            TooltipContent={TooltipContent}
+            TooltipContent={tooltip.TooltipContent ?? StandardTooltipContent}
             rtl={rtl}
             svgWidth={svgWidth}
           />

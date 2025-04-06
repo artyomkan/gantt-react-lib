@@ -261,8 +261,8 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
   };
 
   return (
-    <g className='content'>
-      <g className='arrows' fill={arrowColor} stroke={arrowColor}>
+    <g className='gantt-chart-content'>
+      <g className='gantt-chart-arrows' fill={arrowColor} stroke={arrowColor}>
         {tasks.map((task) => {
           return task.barChildren.map((child) => {
             return (
@@ -279,7 +279,11 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
           });
         })}
       </g>
-      <g className='bar' fontFamily={fontFamily} fontSize={fontSize}>
+      <g
+        className='gantt-chart-bar'
+        fontFamily={fontFamily}
+        fontSize={fontSize}
+      >
         {tasks.map((task) => {
           return (
             <TaskItem

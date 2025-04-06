@@ -15,21 +15,40 @@ export const Gantt: Story = {
       {
         id: '1',
         type: TaskType.Task,
-        name: 'Task 1',
-        start: new Date('2024-01-02'),
-        end: new Date('2024-01-02'),
+        name: 'Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1 Task 1',
+        start: new Date('2025-03-02'),
+        end: new Date('2025-03-02'),
         progress: 20,
       },
       {
         id: '2',
         type: TaskType.Task,
         name: 'Task 2',
-        start: new Date('2024-01-02'),
-        end: new Date('2024-01-04'),
+        start: new Date('2025-03-02'),
+        end: new Date('2025-03-04'),
+        progress: 40,
+      },
+      {
+        id: '3',
+        type: TaskType.Task,
+        name: 'Task 3',
+        start: new Date('2025-05-01'),
+        end: new Date('2025-05-01'),
         progress: 40,
       },
     ];
 
-    return <GanttChart viewMode={ViewMode.Day} tasks={allTasks} />;
+    return (
+      <GanttChart
+        rtl={false}
+        headerHeight={48}
+        columnWidth={32}
+        displayBarText={false}
+        locale='ru'
+        rowHeight={32}
+        viewMode={ViewMode.Day}
+        tasks={allTasks}
+      />
+    );
   },
 };

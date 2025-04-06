@@ -19,7 +19,7 @@ export const TopPartOfCalendar: React.FC<TopPartOfCalendarProps> = ({
   yText,
 }) => {
   return (
-    <g className='calendarTop'>
+    <g className='gantt-calendar-top'>
       <line
         x1={x1Line}
         y1={y1Line}

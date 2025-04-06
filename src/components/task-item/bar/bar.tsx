@@ -36,7 +36,7 @@ export const Bar: React.FC<TaskItemProps> = ({
           isDateChangeable && onEventStart('move', task, e);
         }}
       />
-      <g className='handleGroup'>
+      <g className='gantt-chart-handle-group'>
         {isDateChangeable && (
           <g>
             {/* left */}

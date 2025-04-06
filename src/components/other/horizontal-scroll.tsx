@@ -11,7 +11,7 @@ export const HorizontalScroll: React.FC<{
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (scrollRef.current) {
+    if (scrollRef.current && scrollRef.current.scrollLeft !== scroll) {
       scrollRef.current.scrollLeft = scroll;
     }
   }, [scroll]);

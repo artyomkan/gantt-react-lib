@@ -117,11 +117,11 @@ export const GridBody: React.FC<GridBodyProps> = ({
     tickX += columnWidth;
   }
   return (
-    <g className='gridBody'>
-      <g className='rows'>{gridRows}</g>
-      <g className='rowLines'>{rowLines}</g>
-      <g className='ticks'>{ticks}</g>
-      <g className='today'>{today}</g>
+    <g className='gantt-chart-grid'>
+      <g className='gantt-chart-rows'>{gridRows}</g>
+      <g className='gantt-chart-row-lines'>{rowLines}</g>
+      <g className='gantt-chart-ticks'>{ticks}</g>
+      <g className='gantt-chart-today'>{today}</g>
     </g>
   );
 };

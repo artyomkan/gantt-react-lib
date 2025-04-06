@@ -37,6 +37,7 @@ export interface Task {
   dependencies?: string[];
   hideChildren?: boolean;
   displayOrder?: number;
+  displayBarText?: boolean;
 }
 
 export interface EventOption {
@@ -89,6 +90,7 @@ export interface DisplayOption {
    */
   locale?: string;
   rtl?: boolean;
+  displayBarText?: boolean;
 }
 
 export interface StylingOption {
@@ -121,11 +123,13 @@ export interface StylingOption {
   arrowColor?: string;
   arrowIndent?: number;
   todayColor?: string;
-  TooltipContent?: React.FC<{
-    task: Task;
-    fontSize: string;
-    fontFamily: string;
-  }>;
+  tooltip?: {
+    TooltipContent: React.FC<{
+      task: Task;
+      fontSize: string;
+      fontFamily: string;
+    }>;
+  };
   TaskListHeader?: React.FC<{
     headerHeight: number;
     rowWidth: string;
