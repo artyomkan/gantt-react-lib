@@ -7,11 +7,11 @@ import React, {
 } from 'react';
 import { convertToBarTasks } from '../../helpers/bar-helper';
 import { ganttDateRange, seedDates } from '../../helpers/date-helper';
-import { sortTasks } from '../../helpers/other-helper';
+import { useFirstRender } from '../../hooks/use-first-render.hook';
 import { BarTask } from '../../types/bar-task';
 import { DateSetup } from '../../types/date-setup';
 import { GanttEvent } from '../../types/gantt-task-actions';
-import { GanttProps, Task, ViewMode } from '../../types/public-types';
+import { GanttProps, ViewMode } from '../../types/public-types';
 import { CalendarProps } from '../calendar/calendar';
 import { GridProps } from '../grid/grid';
 import { HorizontalScroll } from '../other/horizontal-scroll';
@@ -23,9 +23,10 @@ import { TaskListTableDefault } from '../task-list/task-list-table';
 import styles from './gantt.module.css';
 import { TaskGantt } from './task-gantt';
 import { TaskGanttContentProps } from './task-gantt-content';
+import { mapTaskItemArrayToExtended } from './utils';
 
 export const Gantt: React.FunctionComponent<GanttProps> = ({
-  tasks,
+  defaultTasks,
   headerHeight = 50,
   columnWidth = 60,
   listCellWidth = '155px',
@@ -72,6 +73,10 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const taskListRef = useRef<HTMLDivElement>(null);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [active, setActive] = React.useState<string[]>([]);
+  const [tasks, setTasks] = React.useState(() => {
+    return mapTaskItemArrayToExtended(defaultTasks, active);
+  });
   const [dateSetup, setDateSetup] = useState<DateSetup>(() => {
     const [startDate, endDate] = ganttDateRange(tasks, viewMode, preStepsCount);
     return { viewMode, dates: seedDates(startDate, endDate, viewMode) };
@@ -87,6 +92,9 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   const [ganttEvent, setGanttEvent] = useState<GanttEvent>({
     action: '',
   });
+
+  const isFirstRender = useFirstRender();
+
   const taskHeight = useMemo(
     () => (rowHeight * barFill) / 100,
     [rowHeight, barFill]
@@ -104,8 +112,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
 
   // task change events
   useEffect(() => {
-    let filteredTasks: Task[] = tasks;
-    filteredTasks = filteredTasks.sort(sortTasks);
+    const filteredTasks = tasks.filter((x) => x.isVisible);
     const [startDate, endDate] = ganttDateRange(
       filteredTasks,
       viewMode,
@@ -397,10 +404,10 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     }
     setSelectedTask(newSelectedTask);
   };
-  const handleExpanderClick = (task: Task) => {
-    if (onExpanderClick && task.hideChildren !== undefined) {
-      onExpanderClick({ ...task, hideChildren: !task.hideChildren });
-    }
+  const handleExpanderClick = (taskId: string, isExpanded: boolean) => {
+    onExpanderClick?.(taskId, isExpanded);
+
+    setActive([...active, taskId]);
   };
   const gridProps: GridProps = {
     columnWidth,

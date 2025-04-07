@@ -30,7 +30,7 @@ export const addToDate = (
   quantity: number,
   scale: DateHelperScales
 ) => {
-  const newDate = new Date(
+  return new Date(
     date.getFullYear() + (scale === 'year' ? quantity : 0),
     date.getMonth() + (scale === 'month' ? quantity : 0),
     date.getDate() + (scale === 'day' ? quantity : 0),
@@ -39,7 +39,6 @@ export const addToDate = (
     date.getSeconds() + (scale === 'second' ? quantity : 0),
     date.getMilliseconds() + (scale === 'millisecond' ? quantity : 0)
   );
-  return newDate;
 };
 
 export const startOfDate = (date: Date, scale: DateHelperScales) => {
@@ -57,7 +56,7 @@ export const startOfDate = (date: Date, scale: DateHelperScales) => {
     const maxScore = scores.indexOf(scale);
     return scores.indexOf(_scale) <= maxScore;
   };
-  const newDate = new Date(
+  return new Date(
     date.getFullYear(),
     shouldReset('year') ? 0 : date.getMonth(),
     shouldReset('month') ? 1 : date.getDate(),
@@ -66,7 +65,6 @@ export const startOfDate = (date: Date, scale: DateHelperScales) => {
     shouldReset('minute') ? 0 : date.getSeconds(),
     shouldReset('second') ? 0 : date.getMilliseconds()
   );
-  return newDate;
 };
 
 export const ganttDateRange = (

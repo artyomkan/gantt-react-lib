@@ -1,9 +1,9 @@
 import { BarTask } from '../types/bar-task';
 import { BarMoveAction } from '../types/gantt-task-actions';
-import { Task, TaskType } from '../types/public-types';
+import { ITaskExtended, TaskType } from '../types/public-types';
 
 export const convertToBarTasks = (
-  tasks: Task[],
+  tasks: ITaskExtended[],
   dates: Date[],
   columnWidth: number,
   rowHeight: number,
@@ -68,7 +68,7 @@ export const convertToBarTasks = (
 };
 
 const convertToBarTask = (
-  task: Task,
+  task: ITaskExtended,
   index: number,
   dates: Date[],
   columnWidth: number,
@@ -133,7 +133,7 @@ const convertToBarTask = (
 };
 
 const convertToBar = (
-  task: Task,
+  task: ITaskExtended,
   index: number,
   dates: Date[],
   columnWidth: number,

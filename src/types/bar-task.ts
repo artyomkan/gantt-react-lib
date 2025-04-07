@@ -1,6 +1,6 @@
-import { Task } from './public-types';
+import { ITaskExtended } from './public-types';
 
-export interface BarTask extends Task {
+export interface BarTask extends ITaskExtended {
   index: number;
   x1: number;
   x2: number;

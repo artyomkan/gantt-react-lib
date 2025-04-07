@@ -19,7 +19,10 @@ export enum TaskType {
 export interface Task {
   id: string;
   type: TaskType;
-  name: string;
+  name: {
+    text: string;
+    render?: (item: Task) => React.ReactNode;
+  };
   start: Date;
   end: Date;
   /**
@@ -38,7 +41,15 @@ export interface Task {
   hideChildren?: boolean;
   displayOrder?: number;
   displayBarText?: boolean;
+  children?: Task[];
 }
+
+export type ITaskExtended = Task & {
+  parent?: ITaskExtended;
+  isVisible: boolean;
+  isExpanded: boolean;
+  depth: number;
+};
 
 export interface EventOption {
   /**
@@ -78,7 +89,7 @@ export interface EventOption {
   /**
    * Invokes on expander on task list
    */
-  onExpanderClick?: (task: Task) => void;
+  onExpanderClick?: (taskId: string, isExpanded: boolean) => void;
 }
 
 export interface DisplayOption {
@@ -142,16 +153,16 @@ export interface StylingOption {
     fontFamily: string;
     fontSize: string;
     locale: string;
-    tasks: Task[];
+    tasks: ITaskExtended[];
     selectedTaskId: string;
     /**
      * Sets selected task by id
      */
     setSelectedTask: (taskId: string) => void;
-    onExpanderClick: (task: Task) => void;
+    onExpanderClick: (taskId: string, isExpanded: boolean) => void;
   }>;
 }
 
 export interface GanttProps extends EventOption, DisplayOption, StylingOption {
-  tasks: Task[];
+  defaultTasks: Task[];
 }

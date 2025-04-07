@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { BarTask } from '../../types/bar-task';
-import { Task } from '../../types/public-types';
+import { ITaskExtended } from '../../types/public-types';
 
 export type TaskListProps = {
   headerHeight: number;
@@ -11,12 +11,12 @@ export type TaskListProps = {
   ganttHeight: number;
   scrollY: number;
   locale: string;
-  tasks: Task[];
+  tasks: ITaskExtended[];
   taskListRef: React.RefObject<HTMLDivElement>;
   horizontalContainerClass?: string;
   selectedTask: BarTask | undefined;
   setSelectedTask: (task: string) => void;
-  onExpanderClick: (task: Task) => void;
+  onExpanderClick: (taskId: string, isExpanded: boolean) => void;
   TaskListHeader: React.FC<{
     headerHeight: number;
     rowWidth: string;
@@ -29,10 +29,10 @@ export type TaskListProps = {
     fontFamily: string;
     fontSize: string;
     locale: string;
-    tasks: Task[];
+    tasks: ITaskExtended[];
     selectedTaskId: string;
     setSelectedTask: (taskId: string) => void;
-    onExpanderClick: (task: Task) => void;
+    onExpanderClick: (taskId: string, isExpanded: boolean) => void;
   }>;
 };
 

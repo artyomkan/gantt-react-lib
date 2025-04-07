@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Task } from '../../types/public-types';
+import { ITaskExtended } from '../../types/public-types';
 import styles from './task-list-table.module.css';
 
 const localeDateStringCache = {};
@@ -26,10 +26,10 @@ export const TaskListTableDefault: React.FC<{
   fontFamily: string;
   fontSize: string;
   locale: string;
-  tasks: Task[];
+  tasks: ITaskExtended[];
   selectedTaskId: string;
   setSelectedTask: (taskId: string) => void;
-  onExpanderClick: (task: Task) => void;
+  onExpanderClick: (taskId: string, isExpanded: boolean) => void;
 }> = ({
   rowHeight,
   rowWidth,
@@ -53,12 +53,11 @@ export const TaskListTableDefault: React.FC<{
       }}
     >
       {tasks.map((t) => {
-        let expanderSymbol = '';
-        if (t.hideChildren === false) {
-          expanderSymbol = '▼';
-        } else if (t.hideChildren === true) {
-          expanderSymbol = '▶';
-        }
+        const expanderSymbol = t.children?.length
+          ? t.isExpanded
+            ? '▼'
+            : '▶'
+          : undefined;
 
         return (
           <div
@@ -72,7 +71,7 @@ export const TaskListTableDefault: React.FC<{
                 minWidth: rowWidth,
                 maxWidth: rowWidth,
               }}
-              title={t.name}
+              title={t.name.text}
             >
               <div className={styles.taskListNameWrapper}>
                 <div
@@ -81,11 +80,23 @@ export const TaskListTableDefault: React.FC<{
                       ? styles.taskListExpander
                       : styles.taskListEmptyExpander
                   }
-                  onClick={() => onExpanderClick(t)}
+                  onClick={() =>
+                    expanderSymbol
+                      ? onExpanderClick(t.id, t.isExpanded)
+                      : undefined
+                  }
                 >
                   {expanderSymbol}
                 </div>
-                <div>{t.name}</div>
+                <div
+                  onClick={() =>
+                    expanderSymbol
+                      ? onExpanderClick(t.id, t.isExpanded)
+                      : undefined
+                  }
+                >
+                  {t.name.render?.(t) ?? t.name.text}
+                </div>
               </div>
             </div>
             <div
