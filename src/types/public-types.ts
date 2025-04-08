@@ -41,14 +41,15 @@ export interface Task {
   hideChildren?: boolean;
   displayOrder?: number;
   displayBarText?: boolean;
-  children?: Task[];
+  withChildren?: boolean;
 }
 
 export type ITaskExtended = Task & {
   parent?: ITaskExtended;
   isVisible: boolean;
-  isExpanded: boolean;
+  isExpanded?: boolean;
   depth: number;
+  childrenWasLoaded?: boolean
 };
 
 export interface EventOption {
@@ -89,7 +90,7 @@ export interface EventOption {
   /**
    * Invokes on expander on task list
    */
-  onExpanderClick?: (taskId: string, isExpanded: boolean) => void;
+  onExpanderClick?: (taskId: string, isExpanded: boolean) => Promise<Task[]>;
 }
 
 export interface DisplayOption {
@@ -159,7 +160,7 @@ export interface StylingOption {
      * Sets selected task by id
      */
     setSelectedTask: (taskId: string) => void;
-    onExpanderClick: (taskId: string, isExpanded: boolean) => void;
+    onExpanderClick: (task: ITaskExtended, isExpanded: boolean) => void;
   }>;
 }
 

@@ -16,7 +16,7 @@ export type TaskListProps = {
   horizontalContainerClass?: string;
   selectedTask: BarTask | undefined;
   setSelectedTask: (task: string) => void;
-  onExpanderClick: (taskId: string, isExpanded: boolean) => void;
+  onExpanderClick: (task: ITaskExtended, isExpanded: boolean) => void;
   TaskListHeader: React.FC<{
     headerHeight: number;
     rowWidth: string;
@@ -32,7 +32,7 @@ export type TaskListProps = {
     tasks: ITaskExtended[];
     selectedTaskId: string;
     setSelectedTask: (taskId: string) => void;
-    onExpanderClick: (taskId: string, isExpanded: boolean) => void;
+    onExpanderClick: (task: ITaskExtended, isExpanded: boolean) => void;
   }>;
 };
 

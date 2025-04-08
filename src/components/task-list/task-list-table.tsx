@@ -29,7 +29,7 @@ export const TaskListTableDefault: React.FC<{
   tasks: ITaskExtended[];
   selectedTaskId: string;
   setSelectedTask: (taskId: string) => void;
-  onExpanderClick: (taskId: string, isExpanded: boolean) => void;
+  onExpanderClick: (task: ITaskExtended, isExpanded: boolean) => void;
 }> = ({
   rowHeight,
   rowWidth,
@@ -53,7 +53,7 @@ export const TaskListTableDefault: React.FC<{
       }}
     >
       {tasks.map((t) => {
-        const expanderSymbol = t.children?.length
+        const expanderSymbol = t.withChildren
           ? t.isExpanded
             ? '▼'
             : '▶'
@@ -76,13 +76,13 @@ export const TaskListTableDefault: React.FC<{
               <div className={styles.taskListNameWrapper}>
                 <div
                   className={
-                    expanderSymbol
+                      expanderSymbol && t.isExpanded !== undefined
                       ? styles.taskListExpander
                       : styles.taskListEmptyExpander
                   }
                   onClick={() =>
-                    expanderSymbol
-                      ? onExpanderClick(t.id, t.isExpanded)
+                    expanderSymbol && t.isExpanded !== undefined
+                      ? onExpanderClick(t, t.isExpanded)
                       : undefined
                   }
                 >
@@ -91,7 +91,7 @@ export const TaskListTableDefault: React.FC<{
                 <div
                   onClick={() =>
                     expanderSymbol
-                      ? onExpanderClick(t.id, t.isExpanded)
+                      ? onExpanderClick(t, t.isExpanded ?? false)
                       : undefined
                   }
                 >
