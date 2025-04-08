@@ -47,10 +47,10 @@ export const Gantt: Story = {
             },
         ];
 
-        const handleExpanderClick: NonNullable<GanttProps["onExpanderClick"]> = async (taskId, isExpanded) => {
+        const handleExpanderClick: NonNullable<GanttProps["onNewExpanderOpenClick"]> = async (taskId) => {
             await wait({milliseconds: 1000});
 
-            function randomIntFromInterval(min = 1, max = 100) { // min and max included
+            function randomIntFromInterval(min = 1, max = 10000) { // min and max included
                 return Math.floor(Math.random() * (max - min + 1) + min).toString();
             }
 
@@ -89,7 +89,7 @@ export const Gantt: Story = {
                 rowHeight={32}
                 viewMode={ViewMode.Day}
                 defaultTasks={tasks}
-                onExpanderClick={handleExpanderClick}
+                onNewExpanderOpenClick={handleExpanderClick}
             />
         );
     },

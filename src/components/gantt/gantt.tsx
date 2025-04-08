@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import {convertToBarTasks} from '../../helpers/bar-helper';
 import {ganttDateRange, seedDates} from '../../helpers/date-helper';
-import {useFirstRender} from '../../hooks/use-first-render.hook';
 import {BarTask} from '../../types/bar-task';
 import {DateSetup} from '../../types/date-setup';
 import {GanttEvent} from '../../types/gantt-task-actions';
@@ -67,7 +66,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
                                                                onClick,
                                                                onDelete,
                                                                onSelect,
-                                                               onExpanderClick,
+                                                               onNewExpanderOpenClick,
                                                                displayBarText = false,
                                                            }) => {
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -92,8 +91,6 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     const [ganttEvent, setGanttEvent] = useState<GanttEvent>({
         action: '',
     });
-
-    const isFirstRender = useFirstRender();
 
     const taskHeight = useMemo(
         () => (rowHeight * barFill) / 100,
@@ -173,8 +170,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
         subtaskBackgroundColor,
         subtaskBackgroundSelectedColor,
         rtl,
-        scrollX,
-        onExpanderClick,
+        scrollX
     ]);
 
     useEffect(() => {
@@ -414,7 +410,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
             let loadedTasks: Task[] | undefined;
 
             if (!task.childrenWasLoaded) {
-                loadedTasks = await onExpanderClick?.(task.id, isExpanded)
+                loadedTasks = await onNewExpanderOpenClick?.(task.id)
             }
 
             const result = showChildrenTasks(task, tasks, active, loadedTasks)

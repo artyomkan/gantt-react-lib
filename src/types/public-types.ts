@@ -45,7 +45,7 @@ export interface Task {
 }
 
 export type ITaskExtended = Task & {
-  parent?: ITaskExtended;
+  parentId?: string;
   isVisible: boolean;
   isExpanded?: boolean;
   depth: number;
@@ -90,7 +90,7 @@ export interface EventOption {
   /**
    * Invokes on expander on task list
    */
-  onExpanderClick?: (taskId: string, isExpanded: boolean) => Promise<Task[]>;
+  onNewExpanderOpenClick?: (taskId: string) => Promise<Task[]>;
 }
 
 export interface DisplayOption {

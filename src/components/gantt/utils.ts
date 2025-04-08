@@ -12,18 +12,24 @@ export const mapTaskArrayToExtended = (
             [key: string]: ITaskExtended;
         } = {};
 
-        for (let i = 0; i < items.length; i++) {
+        items.forEach(({id, type, withChildren, ...rest}) => {
+            const canExpand = type === TaskType.Milestone || type === TaskType.Task;
+            const parentId = parent?.id;
+            const depth = (parent?.depth ?? 0) + 1;
+
             const item: ITaskExtended = {
-                ...items[i],
-                withChildren: (items[i].type === TaskType.Milestone || items[i].type === TaskType.Task) && items[i].withChildren,
-                parent: parent,
-                isVisible: (!parent || (parent && active?.includes(parent.id))) ?? false,
-                isExpanded: (items[i].type === TaskType.Milestone || items[i].type === TaskType.Task) ? !!active?.includes(items[i].id) : undefined,
-                depth: (parent?.depth ?? 0) + 1
+                id,
+                type,
+                ...rest,
+                withChildren: canExpand && withChildren,
+                parentId,
+                isVisible: (!parentId || active?.includes(parentId)) ?? false,
+                isExpanded: canExpand ? !!active?.includes(id) : undefined,
+                depth
             };
 
-            result[item.id] = item;
-        }
+            result[id] = item;
+        })
 
         return result;
     }
@@ -66,10 +72,9 @@ export const showChildrenTasks = (parent: ITaskExtended, tasks: ITaskExtended[],
     } else {
         return {
             ...result,
-            tasks: newTasks.map(x => x.parent?.id === parent.id ? {
+            tasks: newTasks.map(x => x.parentId === parent.id ? {
                 ...x,
-                isVisible: true,
-                parent: newTasks[parentIndex]
+                isVisible: true
             } : x)
         }
     }
@@ -81,7 +86,7 @@ export const hideChildrenTasks = (parent: ITaskExtended, tasks: ITaskExtended[],
 } => {
     const getDescendantIds = (parentId: string): string[] => {
         const childIds = tasks.reduce<string[]>((acc, task) => {
-            if (task.parent?.id === parentId) {
+            if (task.parentId === parentId) {
                 acc.push(task.id);
             }
 

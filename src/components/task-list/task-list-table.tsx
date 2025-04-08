@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { ITaskExtended } from '../../types/public-types';
 import styles from './task-list-table.module.css';
+import classNames from "classnames";
 
 const localeDateStringCache = {};
 const toLocaleDateStringFactory =
@@ -46,7 +47,7 @@ export const TaskListTableDefault: React.FC<{
 
   return (
     <div
-      className={styles.taskListWrapper}
+      className={classNames(styles.taskListWrapper, "gantt-table-body")}
       style={{
         fontFamily: fontFamily,
         fontSize: fontSize,
@@ -61,7 +62,7 @@ export const TaskListTableDefault: React.FC<{
 
         return (
           <div
-            className={styles.taskListTableRow}
+            className={classNames(styles.taskListTableRow, "gantt-table-body-row")}
             style={{ height: rowHeight }}
             key={`${t.id}row`}
           >

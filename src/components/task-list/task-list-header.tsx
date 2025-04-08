@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './task-list-header.module.css';
+import classNames from "classnames";
 
 export const TaskListHeaderDefault: React.FC<{
   headerHeight: number;
@@ -16,13 +17,13 @@ export const TaskListHeaderDefault: React.FC<{
       }}
     >
       <div
-        className={styles.ganttTable_Header}
+        className={classNames(styles.ganttTable_Header, "gantt-table-header")}
         style={{
           height: headerHeight - 2,
         }}
       >
         <div
-          className={styles.ganttTable_HeaderItem}
+          className={classNames(styles.ganttTable_HeaderItem, "gantt-table-header-item")}
           style={{
             minWidth: rowWidth,
           }}
@@ -30,14 +31,14 @@ export const TaskListHeaderDefault: React.FC<{
           &nbsp;Name
         </div>
         <div
-          className={styles.ganttTable_HeaderSeparator}
+          className={classNames(styles.ganttTable_HeaderSeparator, "gantt-table-header-separator")}
           style={{
             height: headerHeight * 0.5,
             marginTop: headerHeight * 0.2,
           }}
         />
         <div
-          className={styles.ganttTable_HeaderItem}
+            className={classNames(styles.ganttTable_HeaderItem, "gantt-table-header-item")}
           style={{
             minWidth: rowWidth,
           }}
@@ -45,14 +46,14 @@ export const TaskListHeaderDefault: React.FC<{
           &nbsp;From
         </div>
         <div
-          className={styles.ganttTable_HeaderSeparator}
+            className={classNames(styles.ganttTable_HeaderSeparator, "gantt-table-header-separator")}
           style={{
             height: headerHeight * 0.5,
             marginTop: headerHeight * 0.25,
           }}
         />
         <div
-          className={styles.ganttTable_HeaderItem}
+            className={classNames(styles.ganttTable_HeaderItem, "gantt-table-header-item")}
           style={{
             minWidth: rowWidth,
           }}
