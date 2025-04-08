@@ -1,38 +1,59 @@
-.taskListWrapper {
-  border-bottom: #e6e4e4 1px solid;
-  border-left: #e6e4e4 1px solid;
-  display: table;
-}
+.wrapper {
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        table-layout: fixed;
 
-.taskListTableRow {
-  display: table-row;
-  text-overflow: ellipsis;
-}
+        td {
+            border: 1px solid #e0e0e0;
+            border-top: 0;
+            overflow: hidden;
+            padding: 0 8px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
-.taskListTableRow:nth-of-type(even) {
-  background-color: #f5f5f5;
-}
+        .nameWrapper {
+            align-items: center;
+            cursor: pointer;
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 4px;
 
-.taskListCell {
-  display: table-cell;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-.taskListNameWrapper {
-  display: flex;
-}
+            .expander {
+                flex-shrink: 0;
+                height: 16px;
 
-.taskListExpander {
-  color: rgb(86 86 86);
-  cursor: pointer;
-  font-size: 0.6rem;
-  padding: 0.15rem 0.2rem 0rem 0.2rem;
-  user-select: none;
-}
-.taskListEmptyExpander {
-  font-size: 0.6rem;
-  padding-left: 1rem;
-  user-select: none;
+                img {
+                    height: 100%;
+                }
+            }
+
+            .name {
+                display: flex;
+                justify-content: space-between;
+                gap: 4px;
+                min-width: 0;
+                width: 100%;
+
+                .text {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .info {
+                    flex-shrink: 0;
+                    height: 16px;
+
+                    > div {
+                        height: 100%;
+
+                        img {
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

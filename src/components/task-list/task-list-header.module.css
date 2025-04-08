@@ -1,23 +1,15 @@
-.ganttTable {
-  border-bottom: #e6e4e4 1px solid;
-  border-left: #e6e4e4 1px solid;
-  border-top: #e6e4e4 1px solid;
-  display: table;
-}
+.wrapper {
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        table-layout: fixed;
 
-.ganttTable_Header {
-  display: table-row;
-  list-style: none;
-}
-
-.ganttTable_HeaderSeparator {
-  border-right: 1px solid rgb(196, 196, 196);
-  margin-left: -2px;
-  opacity: 1;
-}
-
-.ganttTable_HeaderItem {
-  display: table-cell;
-  vertical-align: -webkit-baseline-middle;
-  vertical-align: middle;
+        td {
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+            padding: 0 8px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
 }

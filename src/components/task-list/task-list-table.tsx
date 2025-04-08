@@ -1,126 +1,96 @@
-import React, { useMemo } from 'react';
-import { ITaskExtended } from '../../types/public-types';
+import React from 'react';
+import {ITaskExtended} from '../../types/public-types';
 import styles from './task-list-table.module.css';
 import classNames from "classnames";
+import moreImg from "../../assets/more.svg"
+import lessImg from "../../assets/less.svg"
+import infoImg from "../../assets/info.svg"
+import {CustomTooltip} from "../other/custom-tooltip";
 
-const localeDateStringCache = {};
-const toLocaleDateStringFactory =
-  (locale: string) =>
-  (date: Date, dateTimeOptions: Intl.DateTimeFormatOptions) => {
-    const key = date.toString();
-    let lds = localeDateStringCache[key];
-    if (!lds) {
-      lds = date.toLocaleDateString(locale, dateTimeOptions);
-      localeDateStringCache[key] = lds;
-    }
-    return lds;
-  };
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
 };
 
 export const TaskListTableDefault: React.FC<{
-  rowHeight: number;
-  rowWidth: string;
-  fontFamily: string;
-  fontSize: string;
-  locale: string;
-  tasks: ITaskExtended[];
-  selectedTaskId: string;
-  setSelectedTask: (taskId: string) => void;
-  onExpanderClick: (task: ITaskExtended, isExpanded: boolean) => void;
+    rowHeight: number;
+    listWidth: string;
+    fontFamily: string;
+    fontSize: string;
+    locale: string;
+    tasks: ITaskExtended[];
+    selectedTaskId: string;
+    setSelectedTask: (taskId: string) => void;
+    onExpanderClick: (task: ITaskExtended, isExpanded: boolean) => void;
 }> = ({
-  rowHeight,
-  rowWidth,
-  tasks,
-  fontFamily,
-  fontSize,
-  locale,
-  onExpanderClick,
-}) => {
-  const toLocaleDateString = useMemo(
-    () => toLocaleDateStringFactory(locale),
-    [locale]
-  );
+          rowHeight,
+          listWidth,
+          tasks,
+          fontFamily,
+          fontSize,
+          locale,
+          onExpanderClick,
+      }) => {
+    return (
+        <div
+            className={classNames(styles.wrapper, "gantt-table-body")}
+            style={{
+                fontFamily: fontFamily,
+                fontSize: fontSize,
+            }}
+        >
+            <table style={{width: listWidth}}>
+                <colgroup>
+                    <col style={{width: "60%"}}/>
+                    <col style={{width: "20%"}}/>
+                    <col style={{width: "20%"}}/>
+                </colgroup>
+                <thead></thead>
+                <tbody className="gantt-table-body">
+                {tasks.map((x) => {
+                    const expanderSymbol = x.withChildren
+                        ? x.isExpanded
+                            ? <img src={lessImg} alt="less"/>
+                            : <img src={moreImg} alt="more"/>
+                        : undefined;
 
-  return (
-    <div
-      className={classNames(styles.taskListWrapper, "gantt-table-body")}
-      style={{
-        fontFamily: fontFamily,
-        fontSize: fontSize,
-      }}
-    >
-      {tasks.map((t) => {
-        const expanderSymbol = t.withChildren
-          ? t.isExpanded
-            ? '▼'
-            : '▶'
-          : undefined;
 
-        return (
-          <div
-            className={classNames(styles.taskListTableRow, "gantt-table-body-row")}
-            style={{ height: rowHeight }}
-            key={`${t.id}row`}
-          >
-            <div
-              className={styles.taskListCell}
-              style={{
-                minWidth: rowWidth,
-                maxWidth: rowWidth,
-              }}
-              title={t.name.text}
-            >
-              <div className={styles.taskListNameWrapper}>
-                <div
-                  className={
-                      expanderSymbol && t.isExpanded !== undefined
-                      ? styles.taskListExpander
-                      : styles.taskListEmptyExpander
-                  }
-                  onClick={() =>
-                    expanderSymbol && t.isExpanded !== undefined
-                      ? onExpanderClick(t, t.isExpanded)
-                      : undefined
-                  }
-                >
-                  {expanderSymbol}
-                </div>
-                <div
-                  onClick={() =>
-                    expanderSymbol
-                      ? onExpanderClick(t, t.isExpanded ?? false)
-                      : undefined
-                  }
-                >
-                  {t.name.render?.(t) ?? t.name.text}
-                </div>
-              </div>
-            </div>
-            <div
-              className={styles.taskListCell}
-              style={{
-                minWidth: rowWidth,
-                maxWidth: rowWidth,
-              }}
-            >
-              &nbsp;{toLocaleDateString(t.start, dateTimeOptions)}
-            </div>
-            <div
-              className={styles.taskListCell}
-              style={{
-                minWidth: rowWidth,
-                maxWidth: rowWidth,
-              }}
-            >
-              &nbsp;{toLocaleDateString(t.end, dateTimeOptions)}
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
+                    return <tr key={x.id} style={{height: rowHeight}}>
+                        <td style={{paddingLeft: x.depth * 8}}>
+                            <div className={classNames(styles.nameWrapper, "gantt-table-body-cell-name-wrapper")}
+                                 onClick={() =>
+                                     expanderSymbol
+                                         ? onExpanderClick(x, x.isExpanded ?? false)
+                                         : undefined
+                                 }>
+                                <div className={classNames(styles.expander, "gantt-table-body-cell-name__expander")}
+                                >
+                                    {expanderSymbol}
+                                </div>
+                                <div className={classNames(styles.name, "gantt-table-body-cell-name")}
+
+                                >
+                                    <div
+                                        className={classNames(styles.text, "gantt-table-body-cell-name_text")}>{x.name.render?.(x) ?? x.name.text}</div>
+                                    <div onClick={(event) => {
+                                        event.stopPropagation();
+                                    }}
+                                         className={classNames(styles.info, "gantt-table-body-cell-name_info")}>
+                                        <CustomTooltip content={<div><strong>Тултип</strong><br/>Доп. инфа</div>}>
+                                            <img src={infoImg} alt="info"/>
+                                        </CustomTooltip>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </td>
+                        <td>{x.start.toLocaleDateString(locale, dateTimeOptions)}</td>
+                        <td>{x.end.toLocaleDateString(locale, dateTimeOptions)}</td>
+                    </tr>
+                })}
+                </tbody>
+            </table>
+        </div>
+    );
 };

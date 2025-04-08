@@ -3,64 +3,40 @@ import styles from './task-list-header.module.css';
 import classNames from "classnames";
 
 export const TaskListHeaderDefault: React.FC<{
-  headerHeight: number;
-  rowWidth: string;
-  fontFamily: string;
-  fontSize: string;
-}> = ({ headerHeight, fontFamily, fontSize, rowWidth }) => {
-  return (
-    <div
-      className={styles.ganttTable}
-      style={{
-        fontFamily: fontFamily,
-        fontSize: fontSize,
-      }}
-    >
-      <div
-        className={classNames(styles.ganttTable_Header, "gantt-table-header")}
-        style={{
-          height: headerHeight - 2,
-        }}
-      >
+    headerHeight: number;
+    listWidth: string;
+    fontFamily: string;
+    fontSize: string;
+}> = ({headerHeight, fontFamily, fontSize, listWidth}) => {
+    return (
         <div
-          className={classNames(styles.ganttTable_HeaderItem, "gantt-table-header-item")}
-          style={{
-            minWidth: rowWidth,
-          }}
+            className={classNames(styles.wrapper, "gantt-table-head")}
+            style={{
+                fontFamily: fontFamily,
+                fontSize: fontSize
+            }}
         >
-          &nbsp;Name
+            <table style={{width: listWidth}}>
+                <colgroup>
+                    <col style={{width: "60%"}}/>
+                    <col style={{width: "20%"}}/>
+                    <col style={{width: "20%"}}/>
+                </colgroup>
+                <thead>
+                <tr style={{height: headerHeight}}>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        From
+                    </td>
+                    <td>
+                        To
+                    </td>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
-        <div
-          className={classNames(styles.ganttTable_HeaderSeparator, "gantt-table-header-separator")}
-          style={{
-            height: headerHeight * 0.5,
-            marginTop: headerHeight * 0.2,
-          }}
-        />
-        <div
-            className={classNames(styles.ganttTable_HeaderItem, "gantt-table-header-item")}
-          style={{
-            minWidth: rowWidth,
-          }}
-        >
-          &nbsp;From
-        </div>
-        <div
-            className={classNames(styles.ganttTable_HeaderSeparator, "gantt-table-header-separator")}
-          style={{
-            height: headerHeight * 0.5,
-            marginTop: headerHeight * 0.25,
-          }}
-        />
-        <div
-            className={classNames(styles.ganttTable_HeaderItem, "gantt-table-header-item")}
-          style={{
-            minWidth: rowWidth,
-          }}
-        >
-          &nbsp;To
-        </div>
-      </div>
-    </div>
-  );
+    );
 };

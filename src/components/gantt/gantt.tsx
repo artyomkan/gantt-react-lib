@@ -17,8 +17,6 @@ import {HorizontalScroll} from '../other/horizontal-scroll';
 import {StandardTooltipContent, Tooltip} from '../other/tooltip';
 import {VerticalScroll} from '../other/vertical-scroll';
 import {TaskList, TaskListProps} from '../task-list/task-list';
-import {TaskListHeaderDefault} from '../task-list/task-list-header';
-import {TaskListTableDefault} from '../task-list/task-list-table';
 import styles from './gantt.module.css';
 import {TaskGantt} from './task-gantt';
 import {TaskGanttContentProps} from './task-gantt-content';
@@ -28,7 +26,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
                                                                defaultTasks,
                                                                headerHeight = 50,
                                                                columnWidth = 60,
-                                                               listCellWidth = '155px',
+                                                               listWidth = '540px',
                                                                rowHeight = 50,
                                                                ganttHeight = 0,
                                                                viewMode = ViewMode.Day,
@@ -58,8 +56,6 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
                                                                todayColor = 'rgba(252, 248, 227, 0.5)',
                                                                viewDate,
                                                                tooltip,
-                                                               TaskListHeader = TaskListHeaderDefault,
-                                                               TaskListTable = TaskListTableDefault,
                                                                onDateChange,
                                                                onProgressChange,
                                                                onDoubleClick,
@@ -241,13 +237,13 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     }, [failedTask, barTasks]);
 
     useEffect(() => {
-        if (!listCellWidth) {
+        if (!listWidth) {
             setTaskListWidth(0);
         }
         if (taskListRef.current) {
             setTaskListWidth(taskListRef.current.offsetWidth);
         }
-    }, [taskListRef, listCellWidth]);
+    }, [taskListRef, listWidth]);
 
     useEffect(() => {
         if (wrapperRef.current) {
@@ -469,7 +465,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
 
     const tableProps: TaskListProps = {
         rowHeight,
-        rowWidth: listCellWidth,
+        listWidth,
         fontFamily,
         fontSize,
         tasks: barTasks,
@@ -481,9 +477,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
         selectedTask,
         taskListRef,
         setSelectedTask: handleSelectedTask,
-        onExpanderClick: handleExpanderClick,
-        TaskListHeader,
-        TaskListTable,
+        onExpanderClick: handleExpanderClick
     };
     return (
         <div>
@@ -493,7 +487,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
                 tabIndex={0}
                 ref={wrapperRef}
             >
-                {listCellWidth && <TaskList {...tableProps} />}
+                {listWidth && <TaskList {...tableProps} />}
                 <TaskGantt
                     gridProps={gridProps}
                     calendarProps={calendarProps}

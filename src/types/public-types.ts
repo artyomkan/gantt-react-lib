@@ -108,7 +108,7 @@ export interface DisplayOption {
 export interface StylingOption {
   headerHeight?: number;
   columnWidth?: number;
-  listCellWidth?: string;
+  listWidth?: string;
   rowHeight?: number;
   ganttHeight?: number;
   barCornerRadius?: number;
@@ -142,26 +142,6 @@ export interface StylingOption {
       fontFamily: string;
     }>;
   };
-  TaskListHeader?: React.FC<{
-    headerHeight: number;
-    rowWidth: string;
-    fontFamily: string;
-    fontSize: string;
-  }>;
-  TaskListTable?: React.FC<{
-    rowHeight: number;
-    rowWidth: string;
-    fontFamily: string;
-    fontSize: string;
-    locale: string;
-    tasks: ITaskExtended[];
-    selectedTaskId: string;
-    /**
-     * Sets selected task by id
-     */
-    setSelectedTask: (taskId: string) => void;
-    onExpanderClick: (task: ITaskExtended, isExpanded: boolean) => void;
-  }>;
 }
 
 export interface GanttProps extends EventOption, DisplayOption, StylingOption {

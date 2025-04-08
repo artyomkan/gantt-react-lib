@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { BarTask } from '../../types/bar-task';
 import { GanttContentMoveAction } from '../../types/gantt-task-actions';
 import { Bar } from './bar/bar';
-import style from './task-list.module.css';
+import styles from './task-item.module.css';
 
 export type TaskItemProps = {
   task: BarTask;
@@ -98,8 +98,8 @@ export const TaskItem: React.FC<TaskItemProps> = (props) => {
           y={task.y + taskHeight * 0.5}
           className={
             isTextInside
-              ? style.barLabel
-              : style.barLabel && style.barLabelOutside
+              ? styles.barLabel
+              : styles.barLabel && styles.barLabelOutside
           }
           ref={textRef}
         >
