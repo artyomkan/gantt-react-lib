@@ -1,15 +1,15 @@
 .wrapper {
-    table {
-        border-collapse: collapse;
-        border-spacing: 0;
-        table-layout: fixed;
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
 
-        td {
-            border: 1px solid #e0e0e0;
-            overflow: hidden;
-            padding: 0 8px;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+    td {
+      border: 1px solid #e0e0e0;
+      overflow: hidden;
+      padding: 0 8px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
+  }
 }

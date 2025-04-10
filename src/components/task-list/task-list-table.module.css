@@ -1,59 +1,55 @@
 .wrapper {
-    table {
-        border-collapse: collapse;
-        border-spacing: 0;
-        table-layout: fixed;
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
 
-        td {
-            border: 1px solid #e0e0e0;
-            border-top: 0;
-            overflow: hidden;
-            padding: 0 8px;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .nameWrapper {
-            align-items: center;
-            cursor: pointer;
-            display: flex;
-            flex-wrap: nowrap;
-            gap: 4px;
-
-            .expander {
-                flex-shrink: 0;
-                height: 16px;
-
-                img {
-                    height: 100%;
-                }
-            }
-
-            .name {
-                display: flex;
-                justify-content: space-between;
-                gap: 4px;
-                min-width: 0;
-                width: 100%;
-
-                .text {
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-
-                .info {
-                    flex-shrink: 0;
-                    height: 16px;
-
-                    > div {
-                        height: 100%;
-
-                        img {
-                            height: 100%;
-                        }
-                    }
-                }
-            }
-        }
+    td {
+      border: 1px solid #e0e0e0;
+      border-top: 0;
+      overflow: hidden;
+      padding: 0 8px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
+
+    .nameWrapper {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 4px;
+
+      .expander {
+        flex-shrink: 0;
+        height: 16px;
+
+        img {
+          height: 100%;
+        }
+      }
+
+      .name {
+        display: flex;
+        gap: 4px;
+        justify-content: space-between;
+        min-width: 0;
+        width: 100%;
+
+        .text {
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .info {
+          flex-shrink: 0;
+          height: 16px;
+
+          img {
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
 }

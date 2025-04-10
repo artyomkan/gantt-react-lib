@@ -21,7 +21,7 @@ export interface Task {
   type: TaskType;
   name: {
     text: string;
-    render?: (item: Task) => React.ReactNode;
+    renderInfo?: EventOption['renderTaskInfo'];
   };
   start: Date;
   end: Date;
@@ -49,7 +49,7 @@ export type ITaskExtended = Task & {
   isVisible: boolean;
   isExpanded?: boolean;
   depth: number;
-  childrenWasLoaded?: boolean
+  childrenWasLoaded?: boolean;
 };
 
 export interface EventOption {
@@ -91,6 +91,7 @@ export interface EventOption {
    * Invokes on expander on task list
    */
   onNewExpanderOpenClick?: (taskId: string) => Promise<Task[]>;
+  renderTaskInfo?: (taskId: string) => React.ReactElement;
 }
 
 export interface DisplayOption {
@@ -135,13 +136,6 @@ export interface StylingOption {
   arrowColor?: string;
   arrowIndent?: number;
   todayColor?: string;
-  tooltip?: {
-    TooltipContent: React.FC<{
-      task: Task;
-      fontSize: string;
-      fontFamily: string;
-    }>;
-  };
 }
 
 export interface GanttProps extends EventOption, DisplayOption, StylingOption {
