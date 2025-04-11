@@ -20,8 +20,8 @@ export const Gantt: Story = {
         name: {
           text: 'Milestone 1',
         },
-        start: new Date('2024-01-02'),
-        end: new Date('2024-01-08'),
+        start: new Date(2024, 1, 2),
+        end: new Date(2024, 1, 16),
         progress: 0,
         withChildren: true,
       },
@@ -31,20 +31,9 @@ export const Gantt: Story = {
         name: {
           text: 'Task 3',
         },
-        start: new Date('2024-01-20'),
-        end: new Date('2024-01-27'),
+        start: new Date(2024, 0, 2),
+        end: new Date(2024, 0, 6),
         progress: 0,
-      },
-      {
-        id: 'Task 4',
-        type: TaskType.Task,
-        name: {
-          text: 'Task 4',
-        },
-        start: new Date('2024-01-22'),
-        end: new Date('2024-01-23'),
-        progress: 0,
-        withChildren: true,
       },
     ];
 
@@ -65,8 +54,8 @@ export const Gantt: Story = {
           name: {
             text: 'Task 1',
           },
-          start: new Date('2024-01-04'),
-          end: new Date('2024-01-07'),
+          start: new Date(2024, 1, 24),
+          end: new Date(2024, 1, 28),
           progress: 0,
         } satisfies Task,
         {
@@ -75,8 +64,8 @@ export const Gantt: Story = {
           name: {
             text: 'Task 2',
           },
-          start: new Date('2024-01-03'),
-          end: new Date('2024-01-04'),
+          start: new Date(2024, 2, 24),
+          end: new Date(2024, 2, 28),
           progress: 0,
           withChildren: true,
         } satisfies Task,

@@ -198,8 +198,8 @@ const taskXCoordinate = (
   isStartDate = true
 ) => {
   const index =
-    dates.findIndex((d) => d.getTime() >= xDate.getTime()) -
-    (isStartDate ? 1 : 0);
+    dates.findIndex((d) => d.getTime() >= xDate.getTime()) +
+    (isStartDate ? 0 : 1);
 
   return index * columnWidth;
 };

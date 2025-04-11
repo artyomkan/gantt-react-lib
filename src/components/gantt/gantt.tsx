@@ -70,7 +70,6 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const taskListRef = useRef<HTMLDivElement>(null);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [active, setActive] = React.useState<string[]>([]);
   const [tasks, setTasks] = React.useState(() => {
     return mapTaskArrayToExtended(defaultTasks, active);
@@ -317,24 +316,6 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     }
   };
 
-  const handleScrollX = (event: SyntheticEvent<HTMLDivElement>) => {
-    const newScrollLeft = event.currentTarget.scrollLeft;
-
-    if (scrollX !== newScrollLeft) {
-      setScrollX(newScrollLeft);
-
-      setIgnoreScrollEvent(true);
-
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-
-      scrollTimeoutRef.current = setTimeout(() => {
-        setIgnoreScrollEvent(false);
-      }, 100);
-    }
-  };
-
   /**
    * Handles arrow keys events and transform it to new scroll
    */
@@ -517,11 +498,11 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
         />
       </div>
       <HorizontalScroll
+        scroll={scrollX}
         svgWidth={svgWidth}
         taskListWidth={taskListWidth}
-        scroll={scrollX}
         rtl={rtl}
-        onScroll={handleScrollX}
+        onScroll={(scrollLeft) => setScrollX(scrollLeft)}
       />
     </div>
   );
