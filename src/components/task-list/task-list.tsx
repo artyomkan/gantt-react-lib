@@ -18,7 +18,7 @@ export type TaskListProps = {
   horizontalContainerClass?: string;
   selectedTask: BarTask | undefined;
   setSelectedTask: (task: string) => void;
-  onExpanderClick: (task: ITaskExtended, isExpanded: boolean) => void;
+  onExpanderClick: (task: ITaskExtended, isExpanded: boolean) => Promise<void>;
   renderTaskInfo: GanttProps['renderTaskInfo'];
 };
 

@@ -25,7 +25,7 @@ export interface Task {
   };
   start: Date;
   end: Date;
-  color?: string
+  color?: string;
   /**
    * From 0 to 100
    */
@@ -136,7 +136,6 @@ export interface StylingOption {
   subtaskProgressSelectedColor?: string;
   subtaskBackgroundColor?: string;
   subtaskBackgroundSelectedColor?: string;
-
   arrowColor?: string;
   arrowIndent?: number;
   todayColor?: string;
