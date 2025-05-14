@@ -25,6 +25,7 @@ export interface Task {
   };
   start: Date;
   end: Date;
+  color?: string
   /**
    * From 0 to 100
    */
@@ -90,7 +91,9 @@ export interface EventOption {
   /**
    * Invokes on expander on task list
    */
-  onNewExpanderOpenClick?: (taskId: string) => Promise<Task[]>;
+  onNewExpanderOpenClick?: (
+    task: Pick<ITaskExtended, 'id' | 'type' | 'start' | 'end'>
+  ) => Promise<Task[]>;
   renderTaskInfo?: (taskId: string) => React.ReactElement;
 }
 
@@ -133,6 +136,7 @@ export interface StylingOption {
   subtaskProgressSelectedColor?: string;
   subtaskBackgroundColor?: string;
   subtaskBackgroundSelectedColor?: string;
+
   arrowColor?: string;
   arrowIndent?: number;
   todayColor?: string;

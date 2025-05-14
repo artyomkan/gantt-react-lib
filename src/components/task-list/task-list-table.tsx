@@ -35,6 +35,8 @@ export const TaskListTableDefault: React.FC<{
   const moreImg =
     'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yLjA4NTkgNC41ODU5OEMxLjg5MDY0IDQuMzkwNzEgMS44OTA2NCA0LjA3NDEzIDIuMDg1OSAzLjg3ODg3QzIuMjgxMTYgMy42ODM2MSAyLjU5Nzc0IDMuNjgzNjEgMi43OTMwMSAzLjg3ODg3TDUuOTc0OTkgNy4wNjA4NUw5LjE1Njk3IDMuODc4ODdDOS4zNTIyMyAzLjY4MzYxIDkuNjY4ODEgMy42ODM2MSA5Ljg2NDA3IDMuODc4ODdDMTAuMDU5MyA0LjA3NDEzIDEwLjA1OTMgNC4zOTA3MSA5Ljg2NDA3IDQuNTg1OThMNi4zMjg1NCA4LjEyMTUxQzYuMTMzMjggOC4zMTY3NyA1LjgxNjcgOC4zMTY3NyA1LjYyMTQzIDguMTIxNTFMMi4wODU5IDQuNTg1OThaIiBmaWxsPSIjNDc0RTUzIi8+Cjwvc3ZnPgo=';
 
+  const [isFetching, setIsFetching] = React.useState(false);
+
   return (
     <div
       className={classNames(styles.wrapper, 'gantt-table-body')}
@@ -95,6 +97,9 @@ export const TaskListTableDefault: React.FC<{
                         )}
                       >
                         {x.name.text}
+                      </div>
+                      <div>
+
                       </div>
                       {(renderTaskInfo ?? x.name.renderInfo) && (
                         <div

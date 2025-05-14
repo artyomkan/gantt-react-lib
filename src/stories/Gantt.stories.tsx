@@ -20,6 +20,7 @@ export const Gantt: Story = {
         name: {
           text: 'Milestone 1',
         },
+        color: "#000000",
         start: new Date(2024, 1, 2),
         end: new Date(2024, 1, 16),
         progress: 0,

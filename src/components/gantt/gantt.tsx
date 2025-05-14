@@ -397,7 +397,12 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
       let loadedTasks: Task[] | undefined;
 
       if (!task.childrenWasLoaded) {
-        loadedTasks = await onNewExpanderOpenClick?.(task.id);
+        loadedTasks = await onNewExpanderOpenClick?.({
+          id: task.id,
+          type: task.type,
+          start: task.start,
+          end: task.end,
+        });
       }
 
       const result = showChildrenTasks(task, tasks, active, loadedTasks);
