@@ -92,9 +92,10 @@ export interface EventOption {
    * Invokes on expander on task list
    */
   onNewExpanderOpenClick?: (
-    task: Pick<ITaskExtended, 'id' | 'type' | 'start' | 'end'>
+    task: Pick<ITaskExtended, 'id' | 'type' | 'start' | 'end' | 'name'>
   ) => Promise<Task[]>;
   renderTaskInfo?: (taskId: string) => React.ReactElement;
+  renderDate?: (value: Date) => React.ReactNode;
 }
 
 export interface DisplayOption {
@@ -107,6 +108,15 @@ export interface DisplayOption {
   locale?: string;
   rtl?: boolean;
   displayBarText?: boolean;
+  i18n?: {
+    table?: {
+      columns?: {
+        name?: string;
+        from?: string;
+        to?: string;
+      };
+    };
+  };
 }
 
 export interface StylingOption {

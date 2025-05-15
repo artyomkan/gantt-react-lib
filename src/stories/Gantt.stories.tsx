@@ -11,29 +11,34 @@ export default {
 
 type Story = StoryObj;
 
+function randomIntFromInterval(min = 1, max = 10000) {
+  // min and max included
+  return Math.floor(Math.random() * (max - min + 1) + min).toString();
+}
+
 export const Gantt: Story = {
   render: () => {
     const tasks: Task[] = [
       {
-        id: 'Milestone 1',
+        id: randomIntFromInterval(),
         type: TaskType.Milestone,
         name: {
           text: 'Milestone 1',
         },
         color: '#000000',
-        start: new Date(2024, 1, 2),
-        end: new Date(2024, 1, 16),
+        start: new Date(2025, 3, 15),
+        end: new Date(2025, 3, 27),
         progress: 0,
         withChildren: true,
       },
       {
-        id: 'Task 3',
+        id: randomIntFromInterval(),
         type: TaskType.Task,
         name: {
           text: 'Task 3',
         },
-        start: new Date(2024, 0, 2),
-        end: new Date(2024, 0, 6),
+        start: new Date(2025, 1, 4),
+        end: new Date(2025, 3, 18),
         progress: 0,
       },
     ];
@@ -42,11 +47,6 @@ export const Gantt: Story = {
       GanttProps['onNewExpanderOpenClick']
     > = async (taskId) => {
       await wait({ milliseconds: 1000 });
-
-      function randomIntFromInterval(min = 1, max = 10000) {
-        // min and max included
-        return Math.floor(Math.random() * (max - min + 1) + min).toString();
-      }
 
       return [
         {
@@ -79,7 +79,6 @@ export const Gantt: Story = {
           rtl={false}
           headerHeight={48}
           columnWidth={32}
-          locale='ru'
           rowHeight={32}
           viewMode={ViewMode.Day}
           defaultTasks={tasks}

@@ -1,7 +1,6 @@
 import React, { ReactChild } from 'react';
 import {
   getCachedDateTimeFormat,
-  getDaysInMonth,
   getLocalDayOfWeek,
   getLocaleMonth,
   getWeekNumberISO8601,
@@ -246,12 +245,7 @@ export const Calendar: React.FC<CalendarProps> = ({
             x1Line={columnWidth * (i + 1)}
             y1Line={0}
             y2Line={topDefaultHeight}
-            xText={
-              columnWidth * (i + 1) -
-              getDaysInMonth(date.getMonth(), date.getFullYear()) *
-                columnWidth +
-              (columnWidth / 2) * 0.8
-            }
+            xText={columnWidth * (i + 1) - date.getDate() * columnWidth * 0.5}
             yText={topDefaultHeight * 0.8}
           />
         );

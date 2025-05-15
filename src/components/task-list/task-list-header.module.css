@@ -1,11 +1,12 @@
 .wrapper {
   table {
+    background: #f4f8ff;
     border-collapse: collapse;
     border-spacing: 0;
     table-layout: fixed;
 
     td {
-      border: 1px solid #e0e0e0;
+      border: 1px solid #d9dee9;
       overflow: hidden;
       padding: 0 8px;
       text-overflow: ellipsis;

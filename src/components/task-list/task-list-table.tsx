@@ -26,6 +26,7 @@ export const TaskListTableDefault: React.FC<{
   setSelectedTask: (taskId: string) => void;
   onExpanderClick: (task: ITaskExtended, isExpanded: boolean) => void;
   renderTaskInfo: GanttProps['renderTaskInfo'];
+  renderDate: GanttProps['renderDate'];
 }> = ({
   rowHeight,
   listWidth,
@@ -35,6 +36,7 @@ export const TaskListTableDefault: React.FC<{
   locale,
   onExpanderClick,
   renderTaskInfo,
+  renderDate,
 }) => {
   const lessImg =
     'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAxMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik05Ljg2NDMgNy40MTQwMkMxMC4wNTk2IDcuNjA5MjkgMTAuMDU5NiA3LjkyNTg3IDkuODY0MyA4LjEyMTEzQzkuNjY5MDMgOC4zMTYzOSA5LjM1MjQ1IDguMzE2MzkgOS4xNTcxOSA4LjEyMTEzTDUuOTc1MjEgNC45MzkxNUwyLjc5MzIzIDguMTIxMTNDMi41OTc5NyA4LjMxNjM5IDIuMjgxMzggOC4zMTYzOSAyLjA4NjEyIDguMTIxMTNDMS44OTA4NiA3LjkyNTg3IDEuODkwODYgNy42MDkyOSAyLjA4NjEyIDcuNDE0MDJMNS42MjA4MyAzLjg3OTMyQzUuNjIxMSAzLjg3OTA0IDUuNjIxMzggMy44Nzg3NyA1LjYyMTY2IDMuODc4NDlDNS44MTY5MiAzLjY4MzIzIDYuMTMzNSAzLjY4MzIzIDYuMzI4NzYgMy44Nzg0OUw5Ljg2NDMgNy40MTQwMloiIGZpbGw9IiM0NzRFNTMiLz4KPC9zdmc+Cg==';
@@ -122,8 +124,14 @@ export const TaskListTableDefault: React.FC<{
                     </div>
                   </div>
                 </td>
-                <td>{x.start.toLocaleDateString(locale, dateTimeOptions)}</td>
-                <td>{x.end.toLocaleDateString(locale, dateTimeOptions)}</td>
+                <td>
+                  {renderDate?.(x.start) ??
+                    x.start.toLocaleDateString(locale, dateTimeOptions)}
+                </td>
+                <td>
+                  {renderDate?.(x.end) ??
+                    x.end.toLocaleDateString(locale, dateTimeOptions)}
+                </td>
               </tr>
             );
           })}

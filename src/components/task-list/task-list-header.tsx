@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import { GanttProps } from '../../types/public-types';
 import styles from './task-list-header.module.css';
 
 export const TaskListHeaderDefault: React.FC<{
@@ -7,7 +8,8 @@ export const TaskListHeaderDefault: React.FC<{
   listWidth: string;
   fontFamily: string;
   fontSize: string;
-}> = ({ headerHeight, fontFamily, fontSize, listWidth }) => {
+  i18n: GanttProps['i18n'];
+}> = ({ headerHeight, fontFamily, fontSize, listWidth, i18n }) => {
   return (
     <div
       className={classNames(styles.wrapper, 'gantt-table-head')}
@@ -24,9 +26,9 @@ export const TaskListHeaderDefault: React.FC<{
         </colgroup>
         <thead>
           <tr style={{ height: headerHeight }}>
-            <td>Name</td>
-            <td>From</td>
-            <td>To</td>
+            <td>{i18n?.table?.columns?.name ?? 'Name'}</td>
+            <td>{i18n?.table?.columns?.from ?? 'From'}</td>
+            <td>{i18n?.table?.columns?.to ?? 'To'}</td>
           </tr>
         </thead>
         <tbody></tbody>

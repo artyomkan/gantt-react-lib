@@ -20,6 +20,8 @@ export type TaskListProps = {
   setSelectedTask: (task: string) => void;
   onExpanderClick: (task: ITaskExtended, isExpanded: boolean) => Promise<void>;
   renderTaskInfo: GanttProps['renderTaskInfo'];
+  renderDate: GanttProps['renderDate'];
+  i18n: GanttProps['i18n'];
 };
 
 export const TaskList: React.FC<TaskListProps> = ({
@@ -38,6 +40,8 @@ export const TaskList: React.FC<TaskListProps> = ({
   taskListRef,
   horizontalContainerClass,
   renderTaskInfo,
+  renderDate,
+  i18n,
 }) => {
   const horizontalContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -51,6 +55,7 @@ export const TaskList: React.FC<TaskListProps> = ({
     fontFamily,
     fontSize,
     listWidth,
+    i18n,
   };
   const selectedTaskId = selectedTask ? selectedTask.id : '';
   const tableProps = {
@@ -64,6 +69,7 @@ export const TaskList: React.FC<TaskListProps> = ({
     setSelectedTask,
     onExpanderClick,
     renderTaskInfo,
+    renderDate,
   };
 
   return (

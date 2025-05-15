@@ -67,6 +67,8 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   onNewExpanderOpenClick,
   displayBarText = false,
   renderTaskInfo,
+  renderDate,
+  i18n,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const taskListRef = useRef<HTMLDivElement>(null);
@@ -402,6 +404,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
           type: task.type,
           start: task.start,
           end: task.end,
+          name: task.name,
         });
       }
 
@@ -475,6 +478,8 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     setSelectedTask: handleSelectedTask,
     onExpanderClick: handleExpanderClick,
     renderTaskInfo,
+    renderDate,
+    i18n,
   };
   return (
     <div>
