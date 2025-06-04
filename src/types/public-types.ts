@@ -25,7 +25,10 @@ export interface Task {
   };
   start: Date;
   end: Date;
-  color?: string;
+  status?: {
+    color: string;
+    name: string;
+  };
   /**
    * From 0 to 100
    */
@@ -91,11 +94,18 @@ export interface EventOption {
   /**
    * Invokes on expander on task list
    */
-  onNewExpanderOpenClick?: (
-    task: Pick<ITaskExtended, 'id' | 'type' | 'start' | 'end' | 'name'>
-  ) => Promise<Task[]>;
+  onExpanderClick?: (
+    type: IExpanderClickType,
+    task: Pick<ITaskExtended, 'id' | 'type' | 'start' | 'end' | 'name'>,
+    tasks?: Pick<ITaskExtended, 'status'>[]
+  ) => void;
   renderTaskInfo?: (taskId: string) => React.ReactElement;
   renderDate?: (value: Date) => React.ReactNode;
+}
+
+export enum IExpanderClickType {
+  Expand = 1,
+  Collapse,
 }
 
 export interface DisplayOption {
@@ -153,4 +163,7 @@ export interface StylingOption {
 
 export interface GanttProps extends EventOption, DisplayOption, StylingOption {
   defaultTasks: Task[];
+  loadChildrenFunc?: (
+    parent: Pick<ITaskExtended, 'id' | 'type' | 'start' | 'end' | 'name'>
+  ) => Promise<Task[]>;
 }

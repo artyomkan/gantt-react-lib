@@ -10,7 +10,12 @@ import { ganttDateRange, seedDates } from '../../helpers/date-helper';
 import { BarTask } from '../../types/bar-task';
 import { DateSetup } from '../../types/date-setup';
 import { GanttEvent } from '../../types/gantt-task-actions';
-import { GanttProps, Task, ViewMode } from '../../types/public-types';
+import {
+  GanttProps,
+  IExpanderClickType,
+  Task,
+  ViewMode,
+} from '../../types/public-types';
 import { CalendarProps } from '../calendar/calendar';
 import { GridProps } from '../grid/grid';
 import { HorizontalScroll } from '../other/horizontal-scroll';
@@ -64,11 +69,12 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   onClick,
   onDelete,
   onSelect,
-  onNewExpanderOpenClick,
+  onExpanderClick,
   displayBarText = false,
   renderTaskInfo,
   renderDate,
   i18n,
+  loadChildrenFunc,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const taskListRef = useRef<HTMLDivElement>(null);
@@ -386,26 +392,33 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     task,
     isExpanded
   ) => {
+    const currentTask = {
+      id: task.id,
+      type: task.type,
+      start: task.start,
+      end: task.end,
+      name: task.name,
+    };
+
     if (isExpanded) {
       const { tasks: newTasks, active: newActive } = hideChildrenTasks(
         task,
         tasks,
         active
       );
-
       setTasks(newTasks);
       setActive(newActive);
+
+      onExpanderClick?.(
+        IExpanderClickType.Collapse,
+        currentTask,
+        newTasks.filter((x) => x.isVisible)
+      );
     } else {
       let loadedTasks: Task[] | undefined;
 
       if (!task.childrenWasLoaded) {
-        loadedTasks = await onNewExpanderOpenClick?.({
-          id: task.id,
-          type: task.type,
-          start: task.start,
-          end: task.end,
-          name: task.name,
-        });
+        loadedTasks = await loadChildrenFunc?.(currentTask);
       }
 
       const result = showChildrenTasks(task, tasks, active, loadedTasks);
@@ -415,6 +428,12 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
 
         setTasks(newTasks);
         setActive(newActive);
+
+        onExpanderClick?.(
+          IExpanderClickType.Expand,
+          currentTask,
+          newTasks.filter((x) => x.isVisible)
+        );
       }
     }
   };

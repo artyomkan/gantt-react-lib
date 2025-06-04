@@ -25,7 +25,10 @@ export const Gantt: Story = {
         name: {
           text: 'Milestone 1',
         },
-        color: '#000000',
+        status: {
+          color: '#000000',
+          name: 'To do',
+        },
         start: new Date(2025, 3, 15),
         end: new Date(2025, 3, 27),
         progress: 0,
@@ -44,7 +47,7 @@ export const Gantt: Story = {
     ];
 
     const handleExpanderClick: NonNullable<
-      GanttProps['onNewExpanderOpenClick']
+      GanttProps['onExpanderClick']
     > = async (taskId) => {
       await wait({ milliseconds: 1000 });
 
@@ -82,7 +85,7 @@ export const Gantt: Story = {
           rowHeight={32}
           viewMode={ViewMode.Day}
           defaultTasks={tasks}
-          onNewExpanderOpenClick={handleExpanderClick}
+          onExpanderClick={handleExpanderClick}
           renderTaskInfo={() => (
             <>
               <img src={infoImg} alt='info'></img>

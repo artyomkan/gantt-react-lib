@@ -4,6 +4,7 @@ export type {
   DisplayOption,
   EventOption,
   GanttProps,
+  IExpanderClickType,
   StylingOption,
   Task,
 } from './types/public-types';

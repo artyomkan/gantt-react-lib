@@ -20,9 +20,9 @@ export const TaskListHeaderDefault: React.FC<{
     >
       <table style={{ width: listWidth }}>
         <colgroup>
-          <col style={{ width: '60%' }} />
-          <col style={{ width: '20%' }} />
-          <col style={{ width: '20%' }} />
+          <col style={{ width: '50%' }} />
+          <col style={{ width: '25%' }} />
+          <col style={{ width: '25%' }} />
         </colgroup>
         <thead>
           <tr style={{ height: headerHeight }}>

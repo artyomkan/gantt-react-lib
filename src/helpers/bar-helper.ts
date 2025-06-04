@@ -93,23 +93,26 @@ const convertToBarTask = (
 ): BarTask => {
   let progressColor = milestoneProgressColor;
   let progressSelectedColor = milestoneProgressSelectedColor;
-  let backgroundColor = task.color ?? milestoneBackgroundColor;
-  let backgroundSelectedColor = task.color ?? milestoneBackgroundSelectedColor;
+  let backgroundColor = task.status?.color ?? milestoneBackgroundColor;
+  let backgroundSelectedColor =
+    task.status?.color ?? milestoneBackgroundSelectedColor;
 
   switch (task.type) {
     case TaskType.Task:
       progressColor = taskProgressColor;
       progressSelectedColor = taskProgressSelectedColor;
-      backgroundColor = task.color ?? taskBackgroundColor;
-      backgroundSelectedColor = task.color ?? taskBackgroundSelectedColor;
+      backgroundColor = task.status?.color ?? taskBackgroundColor;
+      backgroundSelectedColor =
+        task.status?.color ?? taskBackgroundSelectedColor;
 
       break;
 
     case TaskType.Subtask:
       progressColor = subtaskProgressColor;
       progressSelectedColor = subtaskProgressSelectedColor;
-      backgroundColor = task.color ?? subtaskBackgroundColor;
-      backgroundSelectedColor = task.color ?? subtaskBackgroundSelectedColor;
+      backgroundColor = task.status?.color ?? subtaskBackgroundColor;
+      backgroundSelectedColor =
+        task.status?.color ?? subtaskBackgroundSelectedColor;
 
       break;
   }
